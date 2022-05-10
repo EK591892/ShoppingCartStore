@@ -3,6 +3,7 @@
     using System;
     using System.Linq;
     using System.Threading.Tasks;
+    using Microsoft.EntityFrameworkCore.ChangeTracking;
 
     public interface IRepository<TEntity> : IDisposable
         where TEntity : class
@@ -11,7 +12,7 @@
 
         IQueryable<TEntity> AllAsNoTracking();
 
-        Task AddAsync(TEntity entity);
+        ValueTask<EntityEntry<TEntity>> AddAsync(TEntity entity);
 
         TEntity FindById(string id);
 

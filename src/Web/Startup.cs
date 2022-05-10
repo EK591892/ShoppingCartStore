@@ -40,7 +40,7 @@ namespace SoppingCartStore.Web
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("ShoppingCartStore.Data")));
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Latest);
 
             services.Configure<IdentityOptions>(options =>
             {
@@ -56,7 +56,6 @@ namespace SoppingCartStore.Web
             });
 
             services.AddIdentity<Customer, IdentityRole>()
-                            .AddDefaultUI()
                             .AddDefaultTokenProviders()
                             .AddEntityFrameworkStores<ShoppingCartStoreDbContext>()
                             .AddDefaultTokenProviders();

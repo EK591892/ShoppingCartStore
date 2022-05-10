@@ -5,6 +5,7 @@
     using System.Threading.Tasks;
     using ShoppingCartStore.Data.Common.Repositories;
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore.ChangeTracking;
 
     public class EfRepository<TEntity> : IRepository<TEntity>
         where TEntity : class
@@ -23,7 +24,7 @@
 
         public virtual IQueryable<TEntity> AllAsNoTracking() => this.DbSet.AsNoTracking();
 
-        //public virtual Task AddAsync(TEntity entity) => this.DbSet.AddAsync(entity);
+        public virtual ValueTask<EntityEntry<TEntity>> AddAsync(TEntity entity) => this.DbSet.AddAsync(entity);
 
         public virtual void Update(TEntity entity)
         {
